@@ -15,7 +15,7 @@ RUN \
 RUN git clone https://github.com/seanap/Audible.com-Search-by-Album.git ~/.puddletag/mp3tag_sources
 
 COPY startapp.sh /startapp.sh
-RUN chmod +x startapp.sh
+RUN chmod +x /startapp.sh
 
 # Define mountable directories.
 VOLUME ["/audiobooks"]
