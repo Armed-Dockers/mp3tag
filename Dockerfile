@@ -16,13 +16,11 @@
 # Docker image version is provided via build arg.
 ARG DOCKER_IMAGE_VERSION=
 
-# Define software download URLs.
-ARG MP3TAG_URL=https://index.monkdex.workers.dev/0:/mp3tagv322b-x64-setup.exe
-
 # Pull base image.
 FROM jlesage/baseimage-gui:debian-10
 
 ARG DOCKER_IMAGE_VERSION
+ARG MP3TAG_URL=https://index.monkdex.workers.dev/0:/mp3tagv322b-x64-setup.exe
 
 # Define working directory.
 RUN mkdir /mp3tag
