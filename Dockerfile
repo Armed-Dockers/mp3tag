@@ -20,7 +20,7 @@ ARG DOCKER_IMAGE_VERSION=
 FROM jlesage/baseimage-gui:debian-10
 
 ARG DOCKER_IMAGE_VERSION
-ARG MP3TAG_URL=https://index.monkdex.workers.dev/0:/mp3tagv322b-x64-setup.exe
+ARG MP3TAG_URL=https://index.monkdex.workers.dev/0:/mp3tagv322bsetup.exe
 
 # Define working directory.
 RUN mkdir /mp3tag
@@ -29,9 +29,9 @@ WORKDIR /mp3tag
 # Install wine
 RUN apt update
 RUN apt install -y software-properties-common mono-complete wget unzip gnupg gnupg2 gnupg1 curl
-RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
-RUN apt-key add winehq.key
-RUN add-apt-repository 'deb https://dl.winehq.org/wine-builds/debian/ buster main'
+# RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
+# RUN apt-key add winehq.key
+# RUN add-apt-repository 'deb https://dl.winehq.org/wine-builds/debian/ buster main'
 RUN apt update
 RUN apt -y install wine
 
