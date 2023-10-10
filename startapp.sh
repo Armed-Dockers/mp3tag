@@ -1,4 +1,4 @@
 #!/bin/sh
 
-exec /usr/bin/puddletag
+/bin/bash /usr/bin/puddletag
 ```
