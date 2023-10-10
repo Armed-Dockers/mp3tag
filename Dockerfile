@@ -47,9 +47,7 @@ RUN curl -# -L -o mp3tag-setup.exe "$MP3TAG_URL"
 COPY startapp.sh /startapp.sh
 
 # Set internal environment variables.
-RUN \
-    set-cont-env APP_NAME "Mp3tag" && \
-    true
+RUN set-cont-env APP_NAME "Mp3tag"
 
 # Define mountable directories.
 VOLUME ["/audiobooks"]
