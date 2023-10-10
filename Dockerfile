@@ -8,13 +8,13 @@ RUN useradd -ms /bin/bash puddle
 RUN apt update
 RUN apt install -y software-properties-common python3 python3-mutagen python3-configobj python3-pyparsing python3-pyqt5 python3-pyqt5.qtsvg python3-unidecode git
 
-# Switch to the new user
-USER puddle
 # Generate and install favicons.
 RUN \
     APP_ICON_URL=https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/jdownloader-2-icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
+# Switch to the new user
+USER puddle
 # Install puddletag
 RUN git clone 'https://github.com/puddletag/puddletag' /puddletag
 WORKDIR /puddletag
