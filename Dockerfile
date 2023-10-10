@@ -49,17 +49,8 @@ COPY startapp.sh /startapp.sh
 # Set internal environment variables.
 RUN \
     set-cont-env APP_NAME "Mp3tag" && \
-    set-cont-env DOCKER_IMAGE_VERSION "$DOCKER_IMAGE_VERSION" && \
     true
 
 # Define mountable directories.
 VOLUME ["/audiobooks"]
 VOLUME ["/music"]
-
-# Metadata.
-LABEL \
-      org.label-schema.name="mp3tag" \
-      org.label-schema.description="Docker container for Mp3tag" \
-      org.label-schema.version="${DOCKER_IMAGE_VERSION:-unknown}" \
-      org.label-schema.vcs-url="https://github.com/Armed-Dockers/mp3tag" \
-      org.label-schema.schema-version="1.0"
