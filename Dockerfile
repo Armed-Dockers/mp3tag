@@ -11,8 +11,7 @@ RUN \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Install puddletag
-RUN git clone 'https://github.com/puddletag/puddletag' /root/puddletag
-WORKDIR /root/puddletag
+RUN git clone 'https://github.com/puddletag/puddletag' /puddletag
 RUN git clone 'https://github.com/seanap/Audible.com-Search-by-Album.git' /root/.puddletag/mp3tag_sources
 
 COPY startapp.sh /startapp.sh

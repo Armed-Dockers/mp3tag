@@ -1,4 +1,4 @@
 #!/bin/sh
 
-/usr/bin/python3 /root/puddletag/puddletag
+/usr/bin/python3 /puddletag/puddletag
 ```
