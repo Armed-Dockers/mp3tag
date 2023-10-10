@@ -16,28 +16,19 @@
 # Docker image version is provided via build arg.
 ARG DOCKER_IMAGE_VERSION=
 
-# Define software download URLs.
-ARG JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar
-
-# Download JDownloader2
-FROM --platform=$BUILDPLATFORM alpine:3.16 AS jd2
-ARG JDOWNLOADER_URL
-RUN \
-    apk --no-cache add curl && \
-    mkdir -p /defaults && \
-    curl -# -L -o /defaults/JDownloader.jar ${JDOWNLOADER_URL}
-
 # Pull base image.
 FROM jlesage/baseimage-gui:alpine-3.16-v4.4.2
 
 ARG DOCKER_IMAGE_VERSION
 
 # Define working directory.
-WORKDIR /tmp
+RUN mkdir /mp3tag
+WORKDIR /mp3tag
 
 # Install dependencies.
 RUN \
     add-pkg \
+        unzip \
         java-common \
         openjdk8-jre \
         # Needed by the init script.
@@ -57,26 +48,23 @@ RUN \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
-COPY rootfs/ /
-COPY --from=jd2 /defaults/JDownloader.jar /defaults/JDownloader.jar
+COPY . /mp3tag
+RUN unzip mp3tag.zip && \
+    rm mp3tag.zip
 
 # Set internal environment variables.
 RUN \
-    set-cont-env APP_NAME "JDownloader 2" && \
+    set-cont-env APP_NAME "Mp3Tag" && \
     set-cont-env DOCKER_IMAGE_VERSION "$DOCKER_IMAGE_VERSION" && \
     true
 
 # Define mountable directories.
-VOLUME ["/output"]
-
-# Expose ports.
-#   - 3129: For MyJDownloader in Direct Connection mode.
-EXPOSE 3129
+VOLUME ["/audiobooks"]
 
 # Metadata.
 LABEL \
-      org.label-schema.name="jdownloader-2" \
-      org.label-schema.description="Docker container for JDownloader 2" \
+      org.label-schema.name="mp3tag" \
+      org.label-schema.description="Docker container for Mp3Tag" \
       org.label-schema.version="${DOCKER_IMAGE_VERSION:-unknown}" \
-      org.label-schema.vcs-url="https://github.com/jlesage/docker-jdownloader-2" \
+      org.label-schema.vcs-url="https://github.com/Armed-Dockers/mp3tag" \
       org.label-schema.schema-version="1.0"
