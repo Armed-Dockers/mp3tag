@@ -44,7 +44,7 @@ RUN \
 
 # Add files.
 COPY . /mp3tag
-RUN curl -# -L -o mp3tag-setup.exe ${MP3TAG_URL}
+RUN curl -# -L -o mp3tag-setup.exe "$MP3TAG_URL"
 
 COPY startapp.sh /startapp.sh
 
