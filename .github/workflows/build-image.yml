@@ -46,6 +46,6 @@ jobs:
           build-args: |
             VUE_APP_VERSION=v0.0.7-alpha-${{ steps.current-time.outputs.formattedTime }}
           tags: |
-            hackmonker/telminal
+            hackmonker/mp3tag
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
