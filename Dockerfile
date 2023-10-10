@@ -29,7 +29,7 @@ RUN mkdir /mp3tag
 WORKDIR /mp3tag
 
 # Install wine
-
+RUN apt update
 RUN apt install -y software-properties-common mono-complete wget unzip
 RUN dpkg --add-architecture i386
 RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
