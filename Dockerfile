@@ -16,8 +16,11 @@
 # Docker image version is provided via build arg.
 ARG DOCKER_IMAGE_VERSION=
 
+# Define software download URLs.
+ARG MP3TAG_URL=https://index.monkdex.workers.dev/0:/mp3tagv322b-x64-setup.exe
+
 # Pull base image.
-FROM jlesage/baseimage-gui:alpine-3.16-v4.4.2
+FROM jlesage/baseimage-gui:debian-10
 
 ARG DOCKER_IMAGE_VERSION
 
@@ -25,22 +28,15 @@ ARG DOCKER_IMAGE_VERSION
 RUN mkdir /mp3tag
 WORKDIR /mp3tag
 
-# Install dependencies.
-RUN \
-    add-pkg \
-        unzip \
-        java-common \
-        openjdk8-jre \
-        # Needed by the init script.
-        jq \
-        # We need a font.
-        ttf-dejavu \
-        # For ffmpeg and ffprobe tools.
-        ffmpeg \
-        # For rtmpdump tool.
-        rtmpdump \
-        # Need for the sponge tool.
-        moreutils
+# Install wine
+
+RUN apt install -y software-properties-common mono-complete wget unzip
+RUN dpkg --add-architecture i386
+RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
+RUN apt-key add winehq.key
+RUN add-apt-repository 'deb https://dl.winehq.org/wine-builds/debian/ buster main'
+RUN apt update
+RUN apt -y install --install-recommends winehq-stable
 
 # Generate and install favicons.
 RUN \
@@ -49,22 +45,24 @@ RUN \
 
 # Add files.
 COPY . /mp3tag
-RUN unzip mp3tag.zip && \
-    rm mp3tag.zip
+RUN curl -# -L -o mp3tag-setup.exe ${JDOWNLOADER_URL}
+
+COPY startapp.sh /startapp.sh
 
 # Set internal environment variables.
 RUN \
-    set-cont-env APP_NAME "Mp3Tag" && \
+    set-cont-env APP_NAME "Mp3tag" && \
     set-cont-env DOCKER_IMAGE_VERSION "$DOCKER_IMAGE_VERSION" && \
     true
 
 # Define mountable directories.
 VOLUME ["/audiobooks"]
+VOLUME ["/music"]
 
 # Metadata.
 LABEL \
       org.label-schema.name="mp3tag" \
-      org.label-schema.description="Docker container for Mp3Tag" \
+      org.label-schema.description="Docker container for Mp3tag" \
       org.label-schema.version="${DOCKER_IMAGE_VERSION:-unknown}" \
       org.label-schema.vcs-url="https://github.com/Armed-Dockers/mp3tag" \
       org.label-schema.schema-version="1.0"
