@@ -35,7 +35,7 @@ RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
 RUN apt-key add winehq.key
 RUN add-apt-repository 'deb https://dl.winehq.org/wine-builds/debian/ buster main'
 RUN apt update
-RUN apt -y install --install-recommends winehq-stable
+RUN apt -y install winehq-stable
 
 # Generate and install favicons.
 RUN \
