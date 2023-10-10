@@ -16,8 +16,8 @@ RUN \
 # Switch to the new user
 USER puddle
 # Install puddletag
-RUN git clone 'https://github.com/puddletag/puddletag' /puddletag
-WORKDIR /puddletag
+RUN git clone 'https://github.com/puddletag/puddletag' /home/puddle/puddletag
+WORKDIR /home/puddle/puddletag
 RUN git clone 'https://github.com/seanap/Audible.com-Search-by-Album.git' /home/puddle/.puddletag/mp3tag_sources
 
 COPY startapp.sh /startapp.sh
