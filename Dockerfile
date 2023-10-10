@@ -9,11 +9,9 @@ RUN \
     APP_ICON_URL=https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/jdownloader-2-icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
-# Add Audible files.
-RUN mkdir -p /puddletag
+# Install puddletag
+RUN git clone 'https://github.com/puddletag/puddletag' /puddletag
 WORKDIR /puddletag
-
-RUN git clone 'https://github.com/puddletag/puddletag'
 RUN git clone 'https://github.com/seanap/Audible.com-Search-by-Album.git' ~/.puddletag/mp3tag_sources
 
 COPY startapp.sh /startapp.sh
