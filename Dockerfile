@@ -30,7 +30,7 @@ WORKDIR /mp3tag
 
 # Install wine
 RUN apt update
-RUN apt install -y software-properties-common mono-complete wget unzip gnupg gnupg2 gnupg1
+RUN apt install -y software-properties-common mono-complete wget unzip gnupg gnupg2 gnupg1 curl
 RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
 RUN apt-key add winehq.key
 RUN add-apt-repository 'deb https://dl.winehq.org/wine-builds/debian/ buster main'
@@ -44,7 +44,7 @@ RUN \
 
 # Add files.
 COPY . /mp3tag
-RUN curl -# -L -o mp3tag-setup.exe ${JDOWNLOADER_URL}
+RUN curl -# -L -o mp3tag-setup.exe ${MP3TAG_URL}
 
 COPY startapp.sh /startapp.sh
 
