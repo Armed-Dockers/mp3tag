@@ -1,5 +1,4 @@
 #!/bin/sh
 
-cd /paddletag
-/usr/bin/python3 ./puddletag
+/usr/bin/python3 /paddletag/puddletag
 ```
