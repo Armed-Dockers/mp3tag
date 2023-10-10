@@ -30,8 +30,7 @@ WORKDIR /mp3tag
 
 # Install wine
 RUN apt update
-RUN apt install -y software-properties-common mono-complete wget unzip
-RUN dpkg --add-architecture i386
+RUN apt install -y software-properties-common mono-complete wget unzip gnupg gnupg2 gnupg1
 RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
 RUN apt-key add winehq.key
 RUN add-apt-repository 'deb https://dl.winehq.org/wine-builds/debian/ buster main'
