@@ -1,5 +1,5 @@
 # Pull base image.
-FROM jlesage/baseimage-gui:debian-11-v4
+FROM jlesage/baseimage-gui:debian-10
 
 # Install puddletag
 RUN apt update
