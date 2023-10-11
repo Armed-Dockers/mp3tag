@@ -12,7 +12,7 @@ RUN \
 # Install puddletag
 # RUN git clone 'https://github.com/puddletag/puddletag'
 # WORKDIR puddletag
-RUN apt install puddletag -y
+RUN apt install -y puddletag
 RUN git clone 'https://github.com/seanap/Audible.com-Search-by-Album.git' audible
 RUN mkdir -p /root/.puddletag/mp3tag_sources && cp -r audible/* /root/.puddletag/mp3tag_sources
 
